@@ -1,5 +1,5 @@
 /*
- * DoubleY maze, training
+ * X-maze, training
  * Mouse starts on the left and goes to the right, has to take either the bottom 
  * or the top trajectory.
  * Ports are TL (top left), BL, TR, BR.

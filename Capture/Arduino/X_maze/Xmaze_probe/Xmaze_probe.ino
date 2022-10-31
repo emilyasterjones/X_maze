@@ -1,5 +1,5 @@
 /*
- * DoubleY maze, reversal
+ * X-maze, probe
  * Mouse starts on the left and goes to the right, has to take either the bottom 
  * or the top trajectory.
  * Ports are TL (top left), BL, TR, BR.
@@ -69,7 +69,7 @@ void setup() {
   //randomSeed(analogRead(1)); //randomize the random generator
   //CORRECT_ARM = random(2);
   doors[!CORRECT_ARM].write(CLOSE_DOOR[!CORRECT_ARM]);
-  doors[CORRECT_ARM+2].write(CLOSE_DOOR[CORRECT_ARM+2]);
+  doors[!CORRECT_ARM+2].write(CLOSE_DOOR[!CORRECT_ARM+2]);
   
   //prime correct first poke
   digitalWrite(SOLENOID_PINS[CORRECT_ARM],OPEN_SOLENOID);
@@ -125,7 +125,7 @@ void loop() {
     TRIAL_INITIATED=0;
 
     //if success
-    if (digitalRead(IR_PINS[!CORRECT_ARM+2])==HIGH){
+    if (digitalRead(IR_PINS[CORRECT_ARM+2])==HIGH){
       //print trial time & number to screen
 	    PER_CORRECT = (PER_CORRECT*(TRIAL-1)+1)/TRIAL;
 	    TRIAL_TYPE_COUNT[CORRECT_ARM*2]++;
@@ -134,12 +134,12 @@ void loop() {
 				TRIAL_TYPE_COUNT[1],TRIAL_TYPE_COUNT[2],TRIAL_TYPE_COUNT[3]);
 
       // deliver reward
-      digitalWrite(SOLENOID_PINS[!CORRECT_ARM+2],OPEN_SOLENOID);
-      delay(REW_VOL * MS_PER_UL[!CORRECT_ARM+2]);
-      digitalWrite(SOLENOID_PINS[!CORRECT_ARM+2],CLOSE_SOLENOID);
+      digitalWrite(SOLENOID_PINS[CORRECT_ARM+2],OPEN_SOLENOID);
+      delay(REW_VOL * MS_PER_UL[CORRECT_ARM+2]);
+      digitalWrite(SOLENOID_PINS[CORRECT_ARM+2],CLOSE_SOLENOID);
 	  
 	  //block entry to other right arm
-	  doors[CORRECT_ARM+2].write(CLOSE_DOOR[CORRECT_ARM+2]);
+	  doors[!CORRECT_ARM+2].write(CLOSE_DOOR[!CORRECT_ARM+2]);
 	  
     } else { //if failure
       //print trial time & number to screen
@@ -149,7 +149,7 @@ void loop() {
 				CORRECT_ARM,TRIAL_INITIATED,0,int(PER_CORRECT*100.0),TRIAL_TYPE_COUNT[0], \
 				TRIAL_TYPE_COUNT[1],TRIAL_TYPE_COUNT[2],TRIAL_TYPE_COUNT[3]);
 	  //block entry to other right arm
-	  doors[!CORRECT_ARM+2].write(CLOSE_DOOR[!CORRECT_ARM+2]);
+	  doors[CORRECT_ARM+2].write(CLOSE_DOOR[CORRECT_ARM+2]);
     }
 
     Serial.println(buffer);
@@ -158,12 +158,16 @@ void loop() {
     doors[CORRECT_ARM].write(CLOSE_DOOR[CORRECT_ARM]);
     delay(500);
 
+    //randomly open top or bottom left door (correct arm)
+    //randomSeed(analogRead(1)); //randomize the random generator
+    //CORRECT_ARM = random(2);
+
     //open bottom or top trajectory, alternating every 10 trials
     if (TRIAL%10 == 0) {
       CORRECT_ARM = !CORRECT_ARM;
     }
     doors[CORRECT_ARM].write(OPEN_DOOR[CORRECT_ARM]);
-
+    
     // end TTL
     digitalWrite(TTL_PINS,END_TTL);
 
