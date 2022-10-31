@@ -22,12 +22,12 @@
 * 0. Set up cage and begin food restriction. Label tails with sharpies.
 * 1 & 2. Open field (OF) for 30 minutes with running wheel and lots of toys. Handle mice.
 * 3+. Linear track (LT) for 20-30 minutes. Start at 25uL reward, lowering gradually to 10uL over days so mice on average get <1.5mL during tracks runs so they don't get sated.
-* n+. Once mice reach 2 trials/min for 2 days, Double-Y (DY) maze double-forced for 20-30 minutes, with same reward progression. Continue until 4 trials/min for 2 days. Optional: switch to DY probe, continuing until 75% correct for 2 days. Can run 2 sessions per day to speed up learning if needed.
+* n+. Once mice reach 2 trials/min for 2 days, X-maze double-forced for 20-30 minutes, with same reward progression. Continue until 4 trials/min for 2 days. Optional: switch to X-maze probe, continuing until 75% correct for 2 days. Can run 2 sessions per day to speed up learning if needed.
 
 **Post-op, on day....**
 * 1-3. Record 10-20 min in OF. 
 * 4+. Record HC => LT => HC => OF, 20 minutes each, until 4 trial/min or 3 days, whichever comes last. Make each recording epoch a separate trigger on the SpikeGLX file. 10uL reward for all tracks.
-* n+. Substitute LT for DY probe. Continue until until 75% correct or 10 days, then switch to DY reversal, also continuing until 75% correct or 10 days.
+* n+. Substitute LT for X-maze probe. Continue until until 75% correct or 10 days, then switch to X-maze reversal, also continuing until 75% correct or 10 days.
 
 ## Daily protocol
 ### Set up
@@ -44,7 +44,6 @@
 #### Between animals
 1. **PuTTy**: load "Arduino" settings. Under "Logging", enter the file name & location.
 1. **Spyder**: set filename.
-1. **ABED**: create datasets.
 1. Wipe down the track and wheel. Reload the syringes to 5mL.
 1. Weigh the next animal.
 
@@ -61,30 +60,21 @@
 #### Camera
 1. Start the camera.
 1. Confirm TTL pulses appear on SpikeGLX.
-1. Log behavior and session start time on ABED.
-1. Fill out the rest of the ABED form.
 
 #### End Epoch
 1. Stop video, then behavior, then recording.
-1. Enter end time on ABED.
 
 #### End Session
 1. Stop acquisition.
 1. Put mouse back on the ball and unplug. Retape the flex slot.
 1. Untwist the data cable.
-1. Transfer video files to Oak. After first recording of the day, start DeepLabCut on Niflheim.
 
 ### Clean up
-1. Transfer all files to Oak.
 1. Feed the mice.
 1. Switch off power to track hardware. _Note: leaving solenoids plugged in for too long can cause them to fry._
 1. Release tubing from solenoid. Drain milk, then rinse with water. Pump air through with plunger to dry.
 1. Wipe everything again.
-1. Later that night: once DeepLabCut is finished, start Kilosort on Niflheim.
 1. _Once a week_: Fill with ethanol/bleach and close valve. Let sit overnight.
-
-### Notes
-* The LT and DY are run off of separate Arduinos on separate ports, but have an overlapping USB cable, TTL cable, and syringes. When switching tasks, be sure to move the USB cable, A0 pin and ground, and lower syringe tubing. LT Arduino comes in on port COM3, DY Arduino comes in on port COM4.
 
 ### Troubleshooting
 * **Arduino**: Check that power strip and switches are turned on and syringe valves are open. Confirm you are on the correct port and that you switched all the wiring and tubing between tasks correctly. Check that all wiring is securely connected. Try adding debug statements to the code in Arduino IDE, uploading it, and testing the task manually.
