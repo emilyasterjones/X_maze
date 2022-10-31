@@ -1,0 +1,6 @@
+double-forced:
+init new session: open all doors, randomly close TL+TR or BL+BR doors
+loop is the same except always close 2 doors
+
+reversal:
+same as regular version, except correct choice is TL=>BR & BL=>TR
