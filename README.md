@@ -1,6 +1,8 @@
 # X_maze
 Build files and scripts for an automated delayed (non)match to direction task, with simultaneous video recording and TTL pulses to synchronize to additional data streams
 
+This task is derived from the H maze, originally published in [(Seigle & Wilson, 2014)](https://elifesciences.org/articles/03061) with a detailed protocol published in [(Wirtshafter, Quan, & Wilson, 2021)](https://bio-protocol.org/e3947).
+
 ### GigE Vimba Camera Acquisition Instructions
 1. Configure Ethernet Card
 	1. Configure ethernet card according to [these settings](https://www.alliedvision.com/fileadmin/content/documents/products/cameras/various/installation-manual/GigE_Installation_Manual.pdf)
