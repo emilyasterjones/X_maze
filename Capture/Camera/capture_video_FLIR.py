@@ -155,9 +155,9 @@ writer = skvideo.io.FFmpegWriter(movieName, outputdict={'-vcodec': 'h264_nvenc'}
 #setup tkinter GUI (non-blocking, i.e. without mainloop) to output images to screen quickly
 window = tk.Tk()
 window.title("camera acquisition")
-geomStrWidth = str(int(IMAGE_WIDTH/2) + 25)
-geomStrHeight = str(int(IMAGE_HEIGHT/2) + 35)
-window.geometry(geomStrWidth + 'x' + geomStrHeight)
+geomWidth = int(IMAGE_WIDTH/2) + 25
+geomHeight = int(IMAGE_HEIGHT/2) + 35
+window.geometry(str(geomWidth) + 'x' + str(geomHeight))
 textlbl = tk.Label(window, text="elapsed time: ")
 textlbl.grid(column=0, row=0)
 imglabel = tk.Label(window) # make Label widget to hold image
@@ -196,7 +196,11 @@ try:
         if frame_numbers[-1]%5 == 0: #update screen every X frames 
             framesElapsedStr = "frame #: " + str(frame_numbers[-1])
             textlbl.configure(text=framesElapsedStr)
-            I = ImageTk.PhotoImage(Image.fromarray(dequeuedAcq1))
+            
+            #I = ImageTk.PhotoImage(Image.fromarray(dequeuedAcq1))
+            img = Image.fromarray(dequeuedAcq1)
+            img_resize = img.resize((geomWidth,geomHeight), Image.LANCZOS)
+            I = ImageTk.PhotoImage(img_resize)
             imglabel.configure(image=I)
             imglabel.image = I #keep reference to image
             window.update() #update on screen (this must be called from main thread)
