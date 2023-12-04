@@ -15,17 +15,19 @@ This task is derived from the H maze, originally published in [(Seigle & Wilson,
 	
 ### FLIR Blackfly S USB3 Camera Acquisition Instructions
 1. Install [SpinView](https://www.flir.com/products/spinnaker-sdk) to set camera settings and stream and record video. See camera_settings file for an example of streaming high resolution color video in dim lighting.
-1. Read the [Blackfly S Manual](https://www.eureca.de/files/pdf/optoelectronics/flir/BFS-Installation-Guide.pdf).
-1. To set up PySpinCapture to record using the GPU by installing the following:
+2. Read the [Blackfly S Manual](https://www.eureca.de/files/pdf/optoelectronics/flir/BFS-Installation-Guide.pdf).
+3. To set up PySpinCapture to record using the GPU by installing the following:
 * [Visual Studio (2022)](https://visualstudio.microsoft.com/)
 * [CUDA Toolkit 12.2](https://developer.nvidia.com/cuda-downloads)
 * [NVIDIA Video Codec SDK (12.1)](https://developer.nvidia.com/nvidia-video-codec-sdk/download)
 * [Python (3.8)](https://www.python.org/downloads/)
 * [Python Spinnaker SDK for your Python version](https://www.flir.com/support-center/iis/machine-vision/downloads/spinnaker-sdk-download/spinnaker-sdk--download-files/)
 * [FFmpeg (6.0)](https://ffmpeg.org/download.html)
-````
+4. Set up Conda environment:
+```
 conda create -n flir python=3.8
 pip install skikit-video
 ```
-1. Update folders and constants in capture_video_FLIR.py, then run:
-`python capture_video_FLIR.py name_of_output_video_file_stem`
+
+5. Update folders and constants in capture_video_FLIR.py, then run:
+`python capture_video_FLIR.py name_of_output_video_file_stem` to capture video.
